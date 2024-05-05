@@ -1,7 +1,7 @@
 const openai = require('../config/open-ai.js');
 const colors = require('colors');
 const messageModel = require('../models/messages');
-async function chatbotLogic(userInput, dataTable) {
+async function ChatBotLogic(userInput, dataTable) {
   try {
     const dataTableString = JSON.stringify(dataTable);
     const chatHistory = [];
@@ -55,4 +55,4 @@ async function chatbotLogic(userInput, dataTable) {
   }
 }
 
-module.exports = { chatbotLogic };
+module.exports = { ChatBotLogic };
