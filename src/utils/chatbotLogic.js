@@ -46,7 +46,7 @@ async function chatbotLogic(userInput, dataTable) {
       });
       await newMessage.save();
     }
-    console.log(chatHistory);
+    // console.log(chatHistory);
 
     return completionText;
   } catch (error) {

@@ -1,8 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const app = express();
-const route = require('./routes');
-const db = require('./config/database.js')
+const route = require('./src/routes');
+const db = require('./src/config/database.js')
 const port = process.env.PORT;
 const path = require('path')
 
