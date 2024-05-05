@@ -1,6 +1,6 @@
-# ChatGPT Chatbot
+# API OPEN AI
 
-This is a ChatGPT chatbot written in Node.js that runs in the terminal
+BOT CAN AUTO LEARN !!
 
 ## Usage
 
@@ -10,12 +10,15 @@ Create a file named `.env` and add the following:
 
 ```
 OPENAI_API_KEY=YOURKEY
+HOST
+MONGO_DB
+MODEL_OPENAI='gpt-3.5-turbo'
 ```
 
 Install dependencies:
 
 ```bash
-npm Install
+npm install
 ```
 
 Run the bot:
