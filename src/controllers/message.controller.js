@@ -21,7 +21,7 @@ class CartController {
     
         } catch (error) {
           console.error(colors.red(error));
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: err.message});
+          res.status(500).json({ success: false, error: 'Internal server error' });
         }
       }
 }
