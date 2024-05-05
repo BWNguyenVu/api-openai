@@ -1,7 +1,6 @@
 const openai = require('../config/open-ai.js');
 const colors = require('colors');
 const messageModel = require('../models/messages');
-
 async function chatbotLogic(userInput, dataTable) {
   try {
     const dataTableString = JSON.stringify(dataTable);
@@ -25,7 +24,7 @@ async function chatbotLogic(userInput, dataTable) {
     messages.push({ role: 'user', content: dataTableString });
     messages.push({ role: 'user', content: userInput });
     const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: process.env.MODEL_OPENAI,
       messages: messages,
     });
 

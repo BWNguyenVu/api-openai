@@ -3,7 +3,7 @@ const router = express.Router();
 const {chatbotLogic} = require('../utils/chatbotLogic');
 const colors = require('colors');
 const dataTable = require('../Infrastructure/Persistences/Respositories/data_test.json');
-
+const MessageController = require('../controllers/message.controller')
 router.post('/chat', async (req, res) => {
     const userInput = req.body.userInput;
     try {
@@ -15,5 +15,6 @@ router.post('/chat', async (req, res) => {
       res.status(500).json({ success: false, error: 'Internal server error' });
     }
   });
+router.get('/', MessageController.GetAllMessage)
 
 module.exports = router;
