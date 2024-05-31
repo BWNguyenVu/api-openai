@@ -58,8 +58,8 @@ class CartController {
       const getDataById = getData.map(data => data._id.toString());
       const dataLength = getDataResponseById.length === 0
       await sendToQueue({ userInput, chatPreHistory, dataLength, getDataResponseById });
-      const url_reponse_message = "https://api-openai.onrender.com/api/v1/messenger/new-message"
-        res.json({ success: true, message: 'Request received and being processed.', url_reponse_message });
+      const url_response_message = "https://api-openai.onrender.com/api/v1/messenger/new-message"
+        res.json({ success: true, message: 'Request received and being processed.', url_response_message });
       } catch (error) {
         console.error('Error in SendMessage:', error);
         res.status(500).json({ success: false, error: 'Internal server error' });
