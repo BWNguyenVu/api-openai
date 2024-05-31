@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const app = express();
 const route = require('./src/routes');
 const db = require('./src/config/database.js')
-const port = 9999;
+const port = process.env.PORT;
 const path = require('path')
 const {consumeQueue} = require('./src/event-bus.js/consumer.js')
 dotenv.config();

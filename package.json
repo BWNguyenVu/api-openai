@@ -24,5 +24,11 @@
     "openai": "^3.3.0",
     "readline-sync": "^1.4.10",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "esm": "^3.2.25",
+    "mocha": "^10.4.0",
+    "supertest": "^7.0.0"
   }
 }

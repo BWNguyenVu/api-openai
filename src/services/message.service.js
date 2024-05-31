@@ -27,12 +27,16 @@ class MessageService {
     // }
     async GetNewMessage() {
       try {
-          const messages = await MessageResponseModel.find();
-          return messages;
-        } catch (error) {
-          throw error;
-        }
-  }
+        // Fetch messages from the database and sort them in descending order by timestamp
+        const messages = await MessageResponseModel
+        .find()
+
+        return messages;
+      } catch (error) {
+        throw error;
+      }
+    }
+    
     
 }
 

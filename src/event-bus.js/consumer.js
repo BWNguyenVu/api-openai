@@ -32,46 +32,46 @@ async function consumeQueue() {
         console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
 
         // 5. Consume messages from queue
-        await channel.consume(queue, async (msg) => {
-            if (msg !== null) {
-                const { userInput, chatPreHistory, dataLength, getDataResponseById } = JSON.parse(msg.content.toString());
-                console.log(" [x] Received '%s'", userInput);
-
-                try {
-                    // Process the message
-                    const completionText = await ChatBotLogic(userInput, chatPreHistory);
-                    console.log(`Processed completion text: ${completionText}`);
-                    
-                    const newMessage = {
-                    message: completionText,
-                    timestamp: new Date() // Hoặc sử dụng Date.now()
-                    };
-                      
-                    if (dataLength) {
-                    const newMessageModel = new messageResponseModel({
-                        messages: [newMessage],
-                    });
-                    await newMessageModel.save();
-                    } else {
-                    await messageResponseModel.findOneAndUpdate(
-                        { _id: getDataResponseById },
-                        { $push: { messages: newMessage } },
-                        { new: true }
-                    );
-                    }
+            await channel.consume(queue, async (msg) => {
+                if (msg !== null) {
+                    const { userInput, chatPreHistory, dataLength, getDataResponseById } = JSON.parse(msg.content.toString());
+                    console.log(" [x] Received '%s'", userInput);
+    
+                    try {
+                        // Process the message
+                        const completionText = await ChatBotLogic(userInput, chatPreHistory);
+                        console.log(`Processed completion text: ${completionText}`);
+                        
+                        const newMessage = {
+                        message: completionText,
+                        timestamp: new Date() // Hoặc sử dụng Date.now()
+                        };
                           
-                    console.log("Successful, saved to database CompletionText");
-
-                    // Acknowledge the message
-                    channel.ack(msg);
-
-                } catch (error) {
-                    console.error('Error processing message:', error);
-                    // Optionally, you can reject the message and requeue it
-                    channel.nack(msg, false, true);
+                        if (dataLength) {
+                        const newMessageModel = new messageResponseModel({
+                            messages: [newMessage],
+                        });
+                        await newMessageModel.save();
+                        } else {
+                        await messageResponseModel.findOneAndUpdate(
+                            { _id: getDataResponseById },
+                            { $push: { messages: newMessage } },
+                            { new: true }
+                        );
+                        }
+                              
+                        console.log("Successful, saved to database CompletionText");
+    
+                        // Acknowledge the message
+                        channel.ack(msg);
+    
+                    } catch (error) {
+                        console.error('Error processing message:', error);
+                        // Optionally, you can reject the message and requeue it
+                        channel.nack(msg, false, true);
+                    }
                 }
-            }
-        });
+            });
     } catch (error) {
         console.error('Error consuming queue:', error);
     }
