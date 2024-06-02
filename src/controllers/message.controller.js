@@ -26,8 +26,15 @@ class CartController {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: err.message});
     }
     }
+    
     async SendMessage(req, res) {
       const userInput = req.body.userInput;
+      console.log('Request received with userInput:', userInput);
+      const isvalid = userInput !== null && userInput !== undefined && userInput.trim() !== ''
+      if(!isvalid) {
+        return res.status(400).json({ success: false, error: 'userInput is invalid' });
+      }
+      
       const chatPreHistory = []
       const response_message_id = uuidv4()
       try {
