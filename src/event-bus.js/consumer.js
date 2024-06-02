@@ -34,7 +34,7 @@ async function consumeQueue() {
         // 5. Consume messages from queue
             await channel.consume(queue, async (msg) => {
                 if (msg !== null) {
-                    const { userInput, chatPreHistory, dataLength, getDataResponseById } = JSON.parse(msg.content.toString());
+                    const { userInput, chatPreHistory, dataLength, getDataResponseById, response_message_id } = JSON.parse(msg.content.toString());
                     console.log(" [x] Received '%s'", userInput);
     
                     try {
@@ -44,6 +44,7 @@ async function consumeQueue() {
                         
                         const newMessage = {
                         message: completionText,
+                        response_message_id: response_message_id,
                         timestamp: new Date() 
                         };
                           

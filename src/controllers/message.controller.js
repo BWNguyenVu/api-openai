@@ -5,6 +5,7 @@ const colors = require('colors');
 const dataTable = require('../Infrastructure/Persistences/Respositories/baseData5mb.json');
 const messageModel = require('../models/messages');
 const messageResponseModel = require('../models/messagesReponse');
+const { v4: uuidv4 } = require('uuid');
 
 class CartController {
     async GetAllMessage(req, res) {
@@ -28,6 +29,7 @@ class CartController {
     async SendMessage(req, res) {
       const userInput = req.body.userInput;
       const chatPreHistory = []
+      const response_message_id = uuidv4()
       try {
       // Extract data from the database
       const getData = await messageModel.find({});
@@ -57,9 +59,9 @@ class CartController {
       const getDataResponseById = getDataResponse.map(data => data._id.toString());
       const getDataById = getData.map(data => data._id.toString());
       const dataLength = getDataResponseById.length === 0
-      await sendToQueue({ userInput, chatPreHistory, dataLength, getDataResponseById });
-      const url_response_message = "https://api-openai.onrender.com/api/v1/messenger/new-message"
-        res.json({ success: true, message: 'Request received and being processed.', url_response_message });
+      await sendToQueue({ userInput, chatPreHistory, dataLength, getDataResponseById, response_message_id });
+      const url_response_message = "https://api-openai.onrender.com/api/v1/messenger/new-message";
+        res.json({ success: true, message: 'Request received and being processed.', url_response_message, response_message_id });
       } catch (error) {
         console.error('Error in SendMessage:', error);
         res.status(500).json({ success: false, error: 'Internal server error' });

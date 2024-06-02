@@ -6,6 +6,9 @@ const messageResponseSchema = new Schema({
         {
             message: {
             },
+            response_message_id: {
+
+            },
             timestamp: {
                 type: Date,
                 default: Date.now
