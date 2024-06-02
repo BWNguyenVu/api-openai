@@ -44,7 +44,7 @@ async function consumeQueue() {
                         
                         const newMessage = {
                         message: completionText,
-                        timestamp: new Date() // Hoặc sử dụng Date.now()
+                        timestamp: new Date() 
                         };
                           
                         if (dataLength) {

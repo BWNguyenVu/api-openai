@@ -8,9 +8,10 @@ async function sendToQueue(message) {
 
     await channel.assertQueue(queue, { durable: true });
 
-    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), { persistent: true });
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), { persistent: true }, {
+      noAck: true
+    });
     console.log(" [x] Sent '%s'", message);
-
     // setTimeout(() => {
     //   connection.close();
     // }, 500);
