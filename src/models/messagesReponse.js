@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 const messageResponseSchema = new Schema({
     messages: [
         {
-            message: {
+            user_request: {
+                
+            },
+            assistant_response: {
+
             },
             response_message_id: {
 

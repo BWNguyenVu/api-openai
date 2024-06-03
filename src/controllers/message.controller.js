@@ -31,7 +31,7 @@ class CartController {
       const userInput = req.body.userInput;
       console.log('Request received with userInput:', userInput);
       const isvalid = userInput !== null && userInput !== undefined && userInput.trim() !== ''
-      if(!isvalid) {
+      if(userInput == undefined) {
         return res.status(400).json({ success: false, error: 'userInput is invalid' });
       }
       

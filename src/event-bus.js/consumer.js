@@ -43,8 +43,9 @@ async function consumeQueue() {
                         console.log(`Processed completion text: ${completionText}`);
                         
                         const newMessage = {
-                        message: completionText,
                         response_message_id: response_message_id,
+                        user_request: userInput,    
+                        assistant_response: completionText,
                         timestamp: new Date() 
                         };
                           
